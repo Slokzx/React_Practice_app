@@ -2,6 +2,7 @@ import { type ReactElement, useState } from "react";
 import "./App.css";
 import CinemaBookingApp from "./CinemaBooking/CinemaBookingApp";
 import StopwatchApp from "./Stopwatch/StopwatchApp";
+import TabFormApp from "./TabFormComponent/TabFormApp";
 
 type ProjectRegistry = {
   "cinema-booking": {
@@ -9,6 +10,10 @@ type ProjectRegistry = {
     component: () => ReactElement;
   };
   stopwatch: {
+    title: string;
+    component: () => ReactElement;
+  };
+  tabForm: {
     title: string;
     component: () => ReactElement;
   };
@@ -22,6 +27,10 @@ const projectRegistry: ProjectRegistry = {
   stopwatch: {
     title: "Stopwatch",
     component: StopwatchApp,
+  },
+  tabForm: {
+    title: "Tab Form",
+    component: TabFormApp,
   },
 };
 
@@ -51,7 +60,7 @@ const createTabInstance = (
   };
 };
 
-const initialProjects: ProjectKey[] = ["cinema-booking", "stopwatch"];
+const initialProjects: ProjectKey[] = ["cinema-booking", "stopwatch", "tabForm"];
 const initialTabs = initialProjects.map((projectKey) =>
   createTabInstance(projectKey)
 );
@@ -134,13 +143,16 @@ const App = () => {
 
         <div className="tab-actions">
           <label htmlFor="project-picker">Add project tab:</label>
-          <select
-            id="project-picker"
-            value={selectedProject}
-            onChange={(event) =>
-              setSelectedProject(event.target.value as ProjectKey)
-            }
-          >
+            <select
+              id="project-picker"
+              value={selectedProject}
+              onChange={(event) => {
+                const value = event.target.value as ProjectKey;
+                if (value in projectRegistry) {
+                  setSelectedProject(value);
+                }
+              }}
+            >
             {Object.entries(projectRegistry).map(([key, project]) => (
               <option key={key} value={key}>
                 {project.title}
