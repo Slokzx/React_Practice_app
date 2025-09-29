@@ -1,0 +1,33 @@
+.button {
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  border-radius: 5px 5px 0 0;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: none;
+  border-color: black;
+  color: black;
+}
+
+.regular {
+  background-color: lightblue;
+}
+
+.premium {
+  background-color: pink;
+}
+
+.vip {
+  background-color: khaki;
+}
+
+.disabled {
+  background-color: dimgrey;
+  cursor: not-allowed;
+}
+
+.selected {
+  background-color: green;
+  color: white;
+}
