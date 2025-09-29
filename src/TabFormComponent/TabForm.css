@@ -1,0 +1,62 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.heading-container {
+  display: flex;
+}
+
+.heading {
+  padding: 5px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.tab-body {
+  display: flex;
+  border: 1px solid black;
+  height: 500px;
+  padding: 20px;
+}
+
+.profile-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: start;
+}
+
+.input-item {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.checkbox-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: start;
+}
+
+.settings-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: start;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px;
+}
+
+.errors {
+  color: red;
+  display: block;
+  font-size: small;
+}

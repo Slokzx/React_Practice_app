@@ -118,6 +118,7 @@ header h1 {
 .tab-actions select {
   min-width: 10rem;
   background: #ffffff;
+  color: #000000;
 }
 
 .tab-actions button {
