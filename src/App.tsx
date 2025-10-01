@@ -3,6 +3,7 @@ import "./App.css";
 import CinemaBookingApp from "./CinemaBooking/CinemaBookingApp";
 import StopwatchApp from "./Stopwatch/StopwatchApp";
 import TabFormApp from "./TabFormComponent/TabFormApp";
+import QuizApp from "./QuizApp/QuizApp";
 
 type ProjectRegistry = {
   "cinema-booking": {
@@ -14,6 +15,10 @@ type ProjectRegistry = {
     component: () => ReactElement;
   };
   tabForm: {
+    title: string;
+    component: () => ReactElement;
+  };
+  quizApp: {
     title: string;
     component: () => ReactElement;
   };
@@ -31,6 +36,10 @@ const projectRegistry: ProjectRegistry = {
   tabForm: {
     title: "Tab Form",
     component: TabFormApp,
+  },
+  quizApp: {
+    title: "Quiz App",
+    component: QuizApp,
   },
 };
 
