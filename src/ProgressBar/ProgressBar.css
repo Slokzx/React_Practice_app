@@ -1,0 +1,64 @@
+.progress-fill {
+  height: 100%;
+  background: #4caf50;
+  transition: width 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-bar {
+  height: 50px;
+  background: #eee;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 15px 0;
+  border: 1px solid;
+  position: relative;
+}
+
+.progress-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.stop-buttons {
+  height: 40px;
+  width: 80px;
+  background-color: red;
+  border-radius: 10px;
+  box-shadow: none;
+  border: 1px solid grey;
+}
+
+.start-buttons {
+  height: 40px;
+  width: 80px;
+  background-color: green;
+  border-radius: 10px;
+  box-shadow: none;
+  border: 1px solid grey;
+}
+
+.reset-buttons {
+  height: 40px;
+  width: 80px;
+  background-color: grey;
+  border-radius: 10px;
+  box-shadow: none;
+  border: 1px solid grey;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  padding: 0px 20px;
+  align-content: space-between;
+}

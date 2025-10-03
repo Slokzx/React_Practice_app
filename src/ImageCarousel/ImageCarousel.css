@@ -1,0 +1,26 @@
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  padding: 0 80px;
+}
+
+.previous-button {
+  height: 40px;
+  background-color: rgb(212, 184, 28);
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.next-button {
+  height: 40px;
+  background-color: rgb(26, 222, 176);
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  font-weight: bold;
+}
