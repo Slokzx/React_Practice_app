@@ -6,6 +6,7 @@ import TabFormApp from "./TabFormComponent/TabFormApp";
 import QuizApp from "./QuizApp/QuizApp";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import ImageCarousel from "./ImageCarousel/ImageCarousel";
+import TicketsBoard from "./TicketBoard/TicketsBoard";
 
 type ProjectRegistry = {
   "cinema-booking": {
@@ -29,6 +30,10 @@ type ProjectRegistry = {
     component: () => ReactElement;
   };
   imageCarousel: {
+    title: string;
+    component: () => ReactElement;
+  };
+  ticketBoard: {
     title: string;
     component: () => ReactElement;
   };
@@ -58,6 +63,10 @@ const projectRegistry: ProjectRegistry = {
   imageCarousel: {
     title: "Image Carousel",
     component: () => <ImageCarousel />,
+  },
+  ticketBoard: {
+    title: "Ticket Board",
+    component: TicketsBoard,
   },
 };
 
