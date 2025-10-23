@@ -1,0 +1,38 @@
+.line {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.tiles {
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  gap: 4px;
+  text-transform: uppercase;
+}
+
+.wordle {
+  flex-direction: column;
+  gap: 4px;
+  display: flex;
+}
+
+.green {
+  background-color: green;
+  color: black;
+}
+
+.yellow {
+  background-color: yellow;
+  color: black;
+}
+
+.gray {
+  background-color: gray;
+  color: black;
+}

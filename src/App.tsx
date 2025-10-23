@@ -7,6 +7,9 @@ import QuizApp from "./QuizApp/QuizApp";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import ImageCarousel from "./ImageCarousel/ImageCarousel";
 import TicketsBoard from "./TicketBoard/TicketsBoard";
+import Wordle from "./Wordle/Wordle";
+import VideoFrame from "./VideoFrame/VideoFrame";
+import JavaScriptPlayground from "./JSPlayground/JSPlayground";
 
 type ProjectRegistry = {
   "cinema-booking": {
@@ -34,6 +37,18 @@ type ProjectRegistry = {
     component: () => ReactElement;
   };
   ticketBoard: {
+    title: string;
+    component: () => ReactElement;
+  };
+  wordle: {
+    title: string;
+    component: () => ReactElement;
+  };
+  videoCarousel: {
+    title: string;
+    component: () => ReactElement;
+  };
+  jsPlayground: {
     title: string;
     component: () => ReactElement;
   };
@@ -68,6 +83,18 @@ const projectRegistry: ProjectRegistry = {
     title: "Ticket Board",
     component: TicketsBoard,
   },
+  wordle: {
+    title: "Wordle",
+    component: Wordle,
+  },
+  videoCarousel: {
+    title: "Video Carousel",
+    component: VideoFrame,
+  },
+  jsPlayground: {
+    title: "JS Playground",
+    component: JavaScriptPlayground,
+  },
 };
 
 type ProjectKey = keyof typeof projectRegistry;
@@ -96,7 +123,14 @@ const createTabInstance = (
   };
 };
 
-const initialProjects: ProjectKey[] = ["cinema-booking", "stopwatch", "tabForm"];
+const initialProjects: ProjectKey[] = [
+  "cinema-booking",
+  "stopwatch",
+  "tabForm",
+  "wordle",
+  "videoCarousel",
+  "jsPlayground",
+];
 const initialTabs = initialProjects.map((projectKey) =>
   createTabInstance(projectKey)
 );
