@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project Summaries</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f4f6fb;
+        color: #1f2937;
+      }
+      body {
+        margin: 0;
+        padding: 2.5rem clamp(1.25rem, 4vw, 3.5rem);
+        line-height: 1.6;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+      header h1 {
+        margin: 0 0 0.5rem;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+      }
+      header p {
+        margin: 0;
+        color: #4b5563;
+      }
+      main {
+        display: grid;
+        gap: 1.75rem;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      section {
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 18px 45px -32px rgba(15, 23, 42, 0.35);
+        padding: 1.75rem;
+        display: grid;
+        gap: 1rem;
+      }
+      section h2 {
+        margin: 0;
+        font-size: 1.3rem;
+        color: #1d4ed8;
+      }
+      .meta {
+        color: #6b7280;
+        font-size: 0.92rem;
+        margin-bottom: -0.5rem;
+      }
+      ul {
+        margin: 0;
+        padding-left: 1.25rem;
+      }
+      li + li {
+        margin-top: 0.35rem;
+      }
+      pre {
+        margin: 0;
+        padding: 1rem 1.1rem;
+        background: #0f172a;
+        color: #f8fafc;
+        border-radius: 12px;
+        overflow-x: auto;
+        font-family: "Fira Code", "SFMono-Regular", Menlo, Consolas, monospace;
+        font-size: 0.92rem;
+      }
+      code {
+        font-family: inherit;
+      }
+      footer {
+        text-align: center;
+        margin-top: 3rem;
+        color: #6b7280;
+        font-size: 0.9rem;
+      }
+      @media (max-width: 640px) {
+        body {
+          padding: 2rem 1.1rem;
+        }
+        section {
+          padding: 1.25rem;
+        }
+        pre {
+          border-radius: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Project Summaries</h1>
+      <p>A quick tour of every mini-app bundled with Project Playground.</p>
+    </header>
+    <main>
+      <section>
+        <h2>Cinema Booking</h2>
+        <p class="meta">Source: <code>src/CinemaBooking/CinemaBookingApp.tsx</code></p>
+        <ul>
+          <li>Seat selection flow with tiered pricing and confirmation state.</li>
+          <li>Tracks selected seats, updates totals, and toggles availability styling.</li>
+          <li>Includes a booking summary drawer that reflects current choices.</li>
+          <li><strong>Key APIs:</strong> <code>useState</code>, <code>useMemo</code>, DOM events.</li>
+        </ul>
+        <pre><code>const [selectedSeats, setSelectedSeats] = useState&lt;string[]&gt;([]);
+
+const toggleSeat = (id: string) =&gt; {
+  setSelectedSeats((prev) =&gt;
+    prev.includes(id)
+      ? prev.filter((seat) =&gt; seat !== id)
+      : [...prev, id]
+  );
+};</code></pre>
+      </section>
+
+      <section>
+        <h2>Stopwatch</h2>
+        <p class="meta">Source: <code>src/Stopwatch/StopwatchApp.tsx</code></p>
+        <ul>
+          <li>Classic stopwatch with start, stop, and reset controls.</li>
+          <li>Maintains elapsed milliseconds using <code>setInterval</code> and a ref.</li>
+          <li>Renders formatted minutes/seconds/milliseconds.</li>
+          <li><strong>Key APIs:</strong> <code>useState</code>, <code>useRef</code>, <code>useEffect</code>, <code>setInterval</code>.</li>
+        </ul>
+        <pre><code>useEffect(() =&gt; {
+  if (!isRunning) return;
+  intervalRef.current = setInterval(() =&gt; {
+    setElapsed((prev) =&gt; prev + 10);
+  }, 10);
+  return () =&gt; clearInterval(intervalRef.current!);
+}, [isRunning]);</code></pre>
+      </section>
+
+      <section>
+        <h2>Tab Form</h2>
+        <p class="meta">Source: <code>src/TabFormComponent/TabFormApp.tsx</code></p>
+        <ul>
+          <li>Controlled form inputs inside a tabbed layout.</li>
+          <li>Persists values per tab key for independent states.</li>
+          <li>Validates basic fields with helper text.</li>
+          <li><strong>Key APIs:</strong> <code>useState</code>, <code>useMemo</code>.</li>
+        </ul>
+        <pre><code>const handleChange = (tabId: string, field: keyof FormValues, value: string) =&gt; {
+  setFormByTab((prev) =&gt; ({
+    ...prev,
+    [tabId]: { ...prev[tabId], [field]: value },
+  }));
+};</code></pre>
+      </section>
+
+      <section>
+        <h2>Quiz App</h2>
+        <p class="meta">Source: <code>src/QuizApp/QuizApp.tsx</code></p>
+        <ul>
+          <li>Multiple-choice quiz engine powered by a questions array.</li>
+          <li>Tracks current question, score, and final results.</li>
+          <li>Provides instant feedback with next-step actions.</li>
+          <li><strong>Key APIs:</strong> <code>useState</code>.</li>
+        </ul>
+        <pre><code>const handleAnswer = (choice: Answer) =&gt; {
+  if (choice.correct) setScore((prev) =&gt; prev + 1);
+  setStep((prev) =&gt; prev + 1);
+};</code></pre>
+      </section>
+
+      <section>
+        <h2>Progress Bar</h2>
+        <p class="meta">Source: <code>src/ProgressBar/ProgressBar.tsx</code></p>
+        <ul>
+          <li>Animated progress indicator with configurable start.</li>
+          <li>Uses <code>setInterval</code> for smooth increments, clamped at 100%.</li>
+          <li>Displays both bar and percentage.</li>
+          <li><strong>Key APIs:</strong> <code>useState</code>, <code>useEffect</code>, <code>setInterval</code>.</li>
+        </ul>
+        <pre><code>useEffect(() =&gt; {
+  const id = setInterval(() =&gt; {
+    setProgress((prev) =&gt; Math.min(prev + 1, 100));
+  }, 80);
+  return () =&gt; clearInterval(id);
+}, []);</code></pre>
+      </section>
+
+      <section>
+        <h2>Image Carousel</h2>
+        <p class="meta">Source: <code>src/ImageCarousel/ImageCarousel.tsx</code></p>
+        <ul>
+          <li>Auto-advancing carousel with manual controls and wrap-around.</li>
+          <li>Applies simple fade transitions between slides.</li>
+          <li><strong>Key APIs:</strong> <code>useState</code>, <code>useEffect</code>, <code>setInterval</code>.</li>
+        </ul>
+        <pre><code>useEffect(() =&gt; {
+  const id = setInterval(() =&gt; {
+    setActive((prev) =&gt; (prev + 1) % images.length);
+  }, 4000);
+  return () =&gt; clearInterval(id);
+}, [images.length]);</code></pre>
+      </section>
+
+      <section>
+        <h2>Ticket Board</h2>
+        <p class="meta">Source: <code>src/TicketBoard/TicketsBoard.tsx</code></p>
+        <ul>
+          <li>Kanban-style layout for moving support tickets.</li>
+          <li>Drag-and-drop simulation managed with state.</li>
+          <li>Columns show counts and card metadata.</li>
+          <li><strong>Key APIs:</strong> <code>useState</code>, pointer events.</li>
+        </ul>
+        <pre><code>const moveTicket = (ticketId: string, nextColumn: ColumnKey) =&gt; {
+  setColumns((prev) =&gt; ({
+    ...prev,
+    [nextColumn]: [...prev[nextColumn], ticketId],
+  }));
+};</code></pre>
+      </section>
+
+      <section>
+        <h2>Wordle</h2>
+        <p class="meta">Source: <code>src/Wordle/Wordle.tsx</code></p>
+        <ul>
+          <li>Keyboard-driven guessing game following Wordle rules.</li>
+          <li>Fetches random solutions and applies color-coded tiles.</li>
+          <li>Handles typing, backspace, and submit via global listeners.</li>
+          <li><strong>Key APIs:</strong> <code>useState</code>, <code>useEffect</code>, <code>fetch</code>, <code>addEventListener</code>.</li>
+        </ul>
+        <pre><code>useEffect(() =&gt; {
+  const handleKey = (event: KeyboardEvent) =&gt; {
+    if (event.key === "Enter") submitGuess();
+    if (event.key === "Backspace") trimGuess();
+    if (/^[a-zA-Z]$/.test(event.key)) appendLetter(event.key);
+  };
+  window.addEventListener("keydown", handleKey);
+  return () =&gt; window.removeEventListener("keydown", handleKey);
+}, [currentGuess]);</code></pre>
+      </section>
+
+      <section>
+        <h2>Video Carousel</h2>
+        <p class="meta">Source: <code>src/VideoFrame/VideoFrame.tsx</code></p>
+        <ul>
+          <li>Timelapse viewer that plays through 30 thumbnails.</li>
+          <li>Floating timeline overlay with markers and playback controls.</li>
+          <li>Scrubbing or clicking markers jumps to specific frames.</li>
+          <li><strong>Key APIs:</strong> <code>useState</code>, <code>useEffect</code>, <code>useRef</code>, DOM measurement.</li>
+        </ul>
+        <pre><code>const handleTimelineClick = (event: MouseEvent&lt;HTMLDivElement&gt;) =&gt; {
+  const { width, left } = event.currentTarget.getBoundingClientRect();
+  const ratio = (event.clientX - left) / width;
+  setCurrentFrame(Math.round(ratio * (frames.length - 1)));
+};</code></pre>
+      </section>
+
+      <section>
+        <h2>JS Playground</h2>
+        <p class="meta">Source: <code>src/JSPlayground/JSPlayground.tsx</code></p>
+        <ul>
+          <li>Lightweight JavaScript runner with line numbers and console capture.</li>
+          <li>Executes snippets via sandboxed <code>new Function</code>.</li>
+          <li>Displays return value separately from captured logs.</li>
+          <li><strong>Key APIs:</strong> <code>useState</code>, <code>useRef</code>, custom console proxy.</li>
+        </ul>
+        <pre><code>const runCode = () =&gt; {
+  const logs: string[] = [];
+  const consoleProxy = {
+    log: (...args: unknown[]) =&gt; logs.push(args.map(String).join(" ")),
+  };
+  // eslint-disable-next-line no-new-func
+  const result = new Function("console", "\"use strict\";" + code)(consoleProxy);
+  setConsoleLogs(logs);
+  setResult(formatValue(result));
+};</code></pre>
+      </section>
+    </main>
+    <footer>
+      © Project Playground — generated for quick reference.
+    </footer>
+  </body>
+</html>

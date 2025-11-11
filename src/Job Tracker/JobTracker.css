@@ -1,0 +1,43 @@
+.job-tracker-section {
+  display: flex;
+  flex-direction: row;
+}
+
+.job-section {
+  width: 25%;
+  border-right: 1px solid black;
+  min-height: fit-content;
+  padding: 0 10px;
+}
+
+.job-section:last-child {
+  border-right: none;
+}
+
+.section-title-card {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.section-title {
+  text-transform: capitalize;
+}
+
+.section-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.section-card {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.card-field {
+  text-align: left;
+  display: flex;
+  gap: 5px;
+}

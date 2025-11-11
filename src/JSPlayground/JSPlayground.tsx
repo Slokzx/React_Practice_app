@@ -63,14 +63,38 @@ const JavaScriptPlayground = () => {
     }
   };
 
+  const insertTab = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key !== "Tab") return;
+
+    event.preventDefault();
+    const element = event.currentTarget;
+    const { selectionStart, selectionEnd, value } = element;
+
+    const nextValue =
+      value.slice(0, selectionStart) + "  " + value.slice(selectionEnd);
+
+    setCode(nextValue);
+
+    requestAnimationFrame(() => {
+      const caret = selectionStart + 2;
+      element.selectionStart = caret;
+      element.selectionEnd = caret;
+    });
+  };
+
   return (
     <div className="playground">
       <h2>JavaScript Playground</h2>
       <p className="playground-note">
-        Type some JavaScript. Press Run and the playground will show the value it gets back.
+        Type some JavaScript. Press Run and the playground will show the value
+        it gets back.
       </p>
       <div className="playground-editor">
-        <pre className="playground-gutter" ref={lineNumberRef} aria-hidden="true">
+        <pre
+          className="playground-gutter"
+          ref={lineNumberRef}
+          aria-hidden="true"
+        >
           {lineNumbers}
         </pre>
         <textarea
@@ -81,6 +105,7 @@ const JavaScriptPlayground = () => {
           className="playground-input"
           rows={10}
           spellCheck={false}
+          onKeyDown={insertTab}
         />
       </div>
       <div className="playground-actions">

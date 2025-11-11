@@ -10,6 +10,8 @@ import TicketsBoard from "./TicketBoard/TicketsBoard";
 import Wordle from "./Wordle/Wordle";
 import VideoFrame from "./VideoFrame/VideoFrame";
 import JavaScriptPlayground from "./JSPlayground/JSPlayground";
+import WeatherApp from "./WeatherApp/WeatherApp";
+import JobTracker from "./Job Tracker/JobTracker";
 
 type ProjectRegistry = {
   "cinema-booking": {
@@ -49,6 +51,14 @@ type ProjectRegistry = {
     component: () => ReactElement;
   };
   jsPlayground: {
+    title: string;
+    component: () => ReactElement;
+  };
+  weatherApp: {
+    title: string;
+    component: () => ReactElement;
+  };
+  jobTracker: {
     title: string;
     component: () => ReactElement;
   };
@@ -95,6 +105,14 @@ const projectRegistry: ProjectRegistry = {
     title: "JS Playground",
     component: JavaScriptPlayground,
   },
+  weatherApp: {
+    title: "Weather App",
+    component: WeatherApp,
+  },
+  jobTracker: {
+    title: "Job Tracker",
+    component: JobTracker,
+  },
 };
 
 type ProjectKey = keyof typeof projectRegistry;
@@ -114,7 +132,8 @@ const createTabInstance = (
   customTitle?: string
 ): TabInstance => {
   const baseTitle = projectRegistry[projectKey].title;
-  const title = customTitle ??
+  const title =
+    customTitle ??
     (existingCount === 0 ? baseTitle : `${baseTitle} ${existingCount + 1}`);
   return {
     id: createTabId(projectKey),
@@ -123,14 +142,7 @@ const createTabInstance = (
   };
 };
 
-const initialProjects: ProjectKey[] = [
-  "cinema-booking",
-  "stopwatch",
-  "tabForm",
-  "wordle",
-  "videoCarousel",
-  "jsPlayground",
-];
+const initialProjects: ProjectKey[] = ["cinema-booking", "jobTracker"];
 const initialTabs = initialProjects.map((projectKey) =>
   createTabInstance(projectKey)
 );
@@ -141,7 +153,7 @@ const App = () => {
     initialTabs[0]?.id ?? ""
   );
   const [selectedProject, setSelectedProject] =
-    useState<ProjectKey>("cinema-booking");
+    useState<ProjectKey>("jobTracker");
 
   const handleAddTab = () => {
     const occurrences = tabs.filter(
@@ -181,6 +193,17 @@ const App = () => {
         <p className="app-subtitle">
           Switch between mini-projects and spin up new tabs on demand.
         </p>
+        <div className="header-actions">
+          <button
+            type="button"
+            className="doc-button"
+            onClick={() =>
+              window.open("/project-summaries.html", "_blank", "noopener")
+            }
+          >
+            View Project Summaries
+          </button>
+        </div>
       </header>
 
       <section className="tab-shell">
@@ -190,7 +213,9 @@ const App = () => {
               key={tab.id}
               role="tab"
               aria-selected={tab.id === activeTab?.id}
-              className={`tab-button ${tab.id === activeTab?.id ? "active" : ""}`}
+              className={`tab-button ${
+                tab.id === activeTab?.id ? "active" : ""
+              }`}
               onClick={() => setActiveTabId(tab.id)}
             >
               <span>{tab.title}</span>
@@ -213,16 +238,16 @@ const App = () => {
 
         <div className="tab-actions">
           <label htmlFor="project-picker">Add project tab:</label>
-            <select
-              id="project-picker"
-              value={selectedProject}
-              onChange={(event) => {
-                const value = event.target.value as ProjectKey;
-                if (value in projectRegistry) {
-                  setSelectedProject(value);
-                }
-              }}
-            >
+          <select
+            id="project-picker"
+            value={selectedProject}
+            onChange={(event) => {
+              const value = event.target.value as ProjectKey;
+              if (value in projectRegistry) {
+                setSelectedProject(value);
+              }
+            }}
+          >
             {Object.entries(projectRegistry).map(([key, project]) => (
               <option key={key} value={key}>
                 {project.title}
